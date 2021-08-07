@@ -64,6 +64,11 @@ def get_modules_defined_attrs(module_path):
     }
 
 
+def get_all_nixos_declaration_files():
+    with find_library("get_all_nixos_declaration_files") as f:
+        return nix_instantiate_eval(f'import {f}', strict=True)
+
+
 def eval_attribute(module_path, attribute):
     with find_library("module_path") as f:
         return nix_instantiate_eval(f'import {f} {module_path} {attribute}')
